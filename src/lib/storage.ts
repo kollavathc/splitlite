@@ -7,7 +7,7 @@ export async function uploadReceipt(file: File): Promise<string> {
   const fileExt = file.name.split('.').pop()
   const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
   
-  const { data, error } = await supabase.storage
+  const { error } = await supabase.storage
     .from('receipts')
     .upload(fileName, file, {
       cacheControl: '3600',

@@ -6,11 +6,20 @@ import { Button } from "@/components/ui/button";
 import { AddExpenseDialog } from "@/components/expenses/add-expense-dialog";
 import { useEffect, useState } from "react";
 import { getReceiptUrl } from "@/lib/storage";
-import { Image, Eye } from "lucide-react";
+import { Image } from "lucide-react";
 import { ReceiptViewerDialog } from "@/components/expenses/receipt-viewer-dialog";
 
 export default function ExpensesPage() {
-  const [expenses, setExpenses] = useState<any[]>([]);
+  const [expenses, setExpenses] = useState<Array<{
+    id: number;
+    description: string;
+    amount: number;
+    date: string;
+    group: string;
+    paidBy: string;
+    status: string;
+    imageUrl: string | null;
+  }>>([]);
   const [loading, setLoading] = useState(true);
   const [receiptViewerOpen, setReceiptViewerOpen] = useState(false);
   const [selectedReceipt, setSelectedReceipt] = useState<{ imageUrl: string; description: string } | null>(null);
@@ -181,9 +190,9 @@ export default function ExpensesPage() {
                         </Button>
                       </div>
                     ) : (
-                      <div className="w-12 h-12 bg-gray-100 rounded border flex items-center justify-center">
-                        <Image className="w-5 h-5 text-gray-400" />
-                      </div>
+                                               <div className="w-12 h-12 bg-gray-100 rounded border flex items-center justify-center">
+                           <Image className="w-5 h-5 text-gray-400" alt="" />
+                         </div>
                     )}
                   </TableCell>
                   <TableCell className="font-medium">{expense.description}</TableCell>

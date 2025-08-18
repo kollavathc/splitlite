@@ -35,7 +35,7 @@ export function AddExpenseDialog() {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [groups, setGroups] = useState<Group[]>([])
-  const [currentUser, setCurrentUser] = useState<any>(null)
+  const [currentUser, setCurrentUser] = useState<{ id: string; email: string } | null>(null)
   
   // Form state
   const [description, setDescription] = useState('')

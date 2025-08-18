@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useState } from "react";
-import { getCurrentUser, getUserGroups } from "@/lib/db";
+
 
 interface MemberBalance {
   userId: string;
@@ -26,7 +26,7 @@ interface Group {
 }
 
 export default function DashboardPage() {
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<{ id: string; email: string } | null>(null);
   const [groups, setGroups] = useState<Group[]>([]);
   const [balances, setBalances] = useState<MemberBalance[]>([]);
   const [loading, setLoading] = useState(true);

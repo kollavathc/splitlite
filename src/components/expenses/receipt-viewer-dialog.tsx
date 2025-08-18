@@ -30,7 +30,7 @@ export function ReceiptViewerDialog({
       setSignedUrl(null)
       setError(null)
     }
-  }, [open, imageUrl])
+  }, [open, imageUrl, loadSignedUrl])
 
   const loadSignedUrl = async () => {
     if (!imageUrl) return

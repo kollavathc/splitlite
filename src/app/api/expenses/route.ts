@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from '@/lib/prisma'
-import { uploadReceipt } from '@/lib/storage'
+
 
 function equalSplit(total: number, memberCount: number): number[] {
   const baseAmount = Math.floor(total * 100 / memberCount) / 100
@@ -79,13 +79,13 @@ export async function POST(request: NextRequest) {
       }))
     } else if (splitMethod === 'custom' && customSplits) {
       // Validate custom splits sum equals total
-      const totalSplit = customSplits.reduce((sum: number, split: any) => sum + parseFloat(split.amount), 0)
+      const totalSplit = customSplits.reduce((sum: number, split: { amount: string | number }) => sum + parseFloat(split.amount.toString()), 0)
       if (Math.abs(totalSplit - parseFloat(amount)) > 0.01) {
         return NextResponse.json({ error: 'Custom splits must equal total amount' }, { status: 400 })
       }
-      splits = customSplits.map((split: any) => ({
+      splits = customSplits.map((split: { userId: string; amount: string | number }) => ({
         userId: split.userId,
-        amount: parseFloat(split.amount)
+        amount: parseFloat(split.amount.toString())
       }))
     }
 

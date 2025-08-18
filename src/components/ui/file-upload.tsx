@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+
 import { Label } from '@/components/ui/label'
 import { X, Upload, Image } from 'lucide-react'
 
@@ -88,7 +88,7 @@ export function FileUpload({ onFileSelect, selectedFile, className }: FileUpload
         {selectedFile ? (
           <div className="space-y-4">
             <div className="flex items-center justify-center">
-              <Image className="w-12 h-12 text-green-600" />
+              <Image className="w-12 h-12 text-green-600" alt="" />
             </div>
             <div>
               <p className="text-sm font-medium text-gray-900">{selectedFile.name}</p>

@@ -35,7 +35,7 @@ interface Group {
 }
 
 export default function SettlePage() {
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<{ id: string; email: string } | null>(null);
   const [groups, setGroups] = useState<Group[]>([]);
   const [balances, setBalances] = useState<MemberBalance[]>([]);
   const [transfers, setTransfers] = useState<Transfer[]>([]);
@@ -132,7 +132,7 @@ export default function SettlePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>You're Owed</CardTitle>
+                             <CardTitle>You&apos;re Owed</CardTitle>
             <CardDescription>Money others owe you</CardDescription>
           </CardHeader>
           <CardContent>
