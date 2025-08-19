@@ -88,7 +88,7 @@ export function FileUpload({ onFileSelect, selectedFile, className }: FileUpload
         {selectedFile ? (
           <div className="space-y-4">
             <div className="flex items-center justify-center">
-              <Image className="w-12 h-12 text-green-600" alt="" />
+              <Image className="w-12 h-12 text-green-600" />
             </div>
             <div>
               <p className="text-sm font-medium text-gray-900">{selectedFile.name}</p>

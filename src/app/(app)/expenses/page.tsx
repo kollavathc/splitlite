@@ -20,7 +20,7 @@ export default function ExpensesPage() {
     status: string;
     imageUrl: string | null;
   }>>([]);
-  const [loading, setLoading] = useState(true);
+  const [_loading, setLoading] = useState(true);
   const [receiptViewerOpen, setReceiptViewerOpen] = useState(false);
   const [selectedReceipt, setSelectedReceipt] = useState<{ imageUrl: string; description: string } | null>(null);
 
@@ -179,11 +179,13 @@ export default function ExpensesPage() {
                           variant="outline"
                           size="sm"
                           onClick={() => {
-                            setSelectedReceipt({
-                              imageUrl: expense.imageUrl,
-                              description: expense.description
-                            });
-                            setReceiptViewerOpen(true);
+                            if (expense.imageUrl) {
+                              setSelectedReceipt({
+                                imageUrl: expense.imageUrl,
+                                description: expense.description
+                              });
+                              setReceiptViewerOpen(true);
+                            }
                           }}
                         >
                           View Receipt
@@ -191,7 +193,7 @@ export default function ExpensesPage() {
                       </div>
                     ) : (
                                                <div className="w-12 h-12 bg-gray-100 rounded border flex items-center justify-center">
-                           <Image className="w-5 h-5 text-gray-400" alt="" />
+                           <Image className="w-5 h-5 text-gray-400" />
                          </div>
                     )}
                   </TableCell>

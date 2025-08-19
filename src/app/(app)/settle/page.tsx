@@ -94,8 +94,8 @@ export default function SettlePage() {
     );
   }
 
-  const selectedGroup = groups.find(g => g.id === selectedGroupId);
-  const userBalance = balances.find(b => b.userId === currentUser?.id)?.net || 0;
+  const _selectedGroup = groups.find(g => g.id === selectedGroupId);
+  const _userBalance = balances.find(b => b.userId === currentUser?.id)?.net || 0;
   const totalOwed = balances.filter(b => b.net > 0).reduce((sum, b) => sum + b.net, 0);
   const totalOwe = balances.filter(b => b.net < 0).reduce((sum, b) => sum + Math.abs(b.net), 0);
 

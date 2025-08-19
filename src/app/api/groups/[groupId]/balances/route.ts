@@ -4,7 +4,7 @@ import { getBalances, minimalTransfers } from '@/lib/server-utils'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { groupId: string } }
+  { params }: { params: Promise<{ groupId: string }> }
 ) {
   try {
     const supabase = await createClient()
@@ -14,7 +14,7 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { groupId } = params
+    const { groupId } = await params
 
     // Get balances for the group
     const balances = await getBalances(groupId)

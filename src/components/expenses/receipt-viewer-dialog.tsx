@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { getSignedReceiptUrl } from '@/lib/storage'
@@ -23,16 +23,7 @@ export function ReceiptViewerDialog({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (open && imageUrl) {
-      loadSignedUrl()
-    } else {
-      setSignedUrl(null)
-      setError(null)
-    }
-  }, [open, imageUrl, loadSignedUrl])
-
-  const loadSignedUrl = async () => {
+  const loadSignedUrl = useCallback(async () => {
     if (!imageUrl) return
 
     setLoading(true)
@@ -47,7 +38,16 @@ export function ReceiptViewerDialog({
     } finally {
       setLoading(false)
     }
-  }
+  }, [imageUrl])
+
+  useEffect(() => {
+    if (open && imageUrl) {
+      loadSignedUrl()
+    } else {
+      setSignedUrl(null)
+      setError(null)
+    }
+  }, [open, imageUrl, loadSignedUrl])
 
   const handleDownload = () => {
     if (signedUrl) {
